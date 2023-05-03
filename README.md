@@ -159,8 +159,33 @@ Consultar les paraules encertades per l'usuari, així com un rànquin dels usuar
 7. Canviar la contrasenya:
 Permetre a l'usuari canviar la seva contrasenya si vol.
 
+### Exemple de funcionament:
 
+Necessitaràs tenir php, apache i mysql instal·lats al teu ordinar, un cop instal·lats, has de prendre cura de les credencials del teu sistema gestor de base de dades:
+![Credentials1](https://github.com/lace8guti/ParaulogicMB/blob/main/Captura%20de%20pantalla%20de%202023-05-03%2021-34-04.png)
+![Credentials1](https://github.com/lace8guti/ParaulogicMB/blob/main/Captura%20de%20pantalla%20de%202023-05-03%2021-34-20.png)
 
-Prova de cas particular:
+Aquestes són les credencials per defecte, però si vols, pots canviar-les segons les teves necessitats.
 
-var t={"l":["m","e","i","a","t","c","d"],"p":{"academia": "acadèmia","academic": "acadèmic","academica": "acadèmica","accadi": "accadi","accadia": "accàdia","accidia": "accídia","acetamida": "acetamida","acid": "àcid","acida": "àcida","acidemia": "acidèmia","aciditat": "aciditat","acimada": "acimada","adam": "adam","adamic": "adàmic","adamica": "adàmica","adamita": "adamita","adamitic": "adamític","adamitica": "adamítica","addicta": "addicta","addicte": "addicte","adiatetic": "adiatètic","adiatetica": "adiatètica","aede": "aede","amatada": "amatada","amida": "amida","atacada": "atacada","cada": "cada","cadec": "càdec","cadet": "cadet","cadi": "cadi","cadmi": "cadmi","cadmic": "càdmic","cadmica": "càdmica","caid": "caid","camada": "camada","cecidi": "cecidi","cicadacia": "cicadàcia","cicadata": "cicadata","daci": "daci","dacia": "dàcia","dad": "dad","dada": "dada o dadà","daic": "daic","daica": "daica","dama": "dama o damà","data": "data","dea": "dea","deca": "decà","decada": "dècada","decidida": "decidida","decidit": "decidit","decim": "dècim","decima": "dècima","deicida": "deïcida","deicidi": "deïcidi","deitat": "deïtat","dema": "demà","demati": "dematí","dia": "dia","diac": "diac","diaca": "diaca","diacid": "diàcid","diacida": "diàcida","diada": "diada","diadema": "diadema","diademada": "diademada","diademat": "diademat","diadic": "diàdic","diadica": "diàdica","diatetic": "diatètic","diatetica": "diatètica","dic": "dic","dicdic": "dic-dic","dictam": "dictam","dictat": "dictat","dictic": "díctic","dictica": "díctica","dida": "dida","didactic": "didàctic","didactica": "didàctica","didim": "dídim","didima": "dídima","didimi": "didimi","die": "diè","dieta": "dieta","dietetic": "dietètic","dietetica": "dietètica","dimidiada": "dimidiada","dimidiat": "dimidiat","dit": "dit","dita": "dita o dità","ditada": "ditada","ditet": "ditet","ecidi": "ecidi","edat": "edat","edema": "edema","edeta": "edetà","edicte": "edicte","eidetic": "eidètic","eidetica": "eidètica","emaciada": "emaciada","emidid": "emídid","idea": "idea","idem": "ídem","imada": "imada","imida": "imida","immediat": "immediat","immediata": "immediata","immeditada": "immeditada","immeditat": "immeditat","macada": "macada","macadam": "macadam","macadamia": "macadàmia","mamada": "mamada","meda": "meda","mede": "mede","medi": "medi","media": "medià","mediat": "mediat","mediata": "mediata","mediateca": "mediateca","medic": "mèdic","medica": "mèdica","mida": "mida","tacada": "tacada","tedi": "tedi","teid": "teid","timid": "tímid","timida": "tímida","timiditat": "timiditat"}
+També hauràs d'importar la Base de dades que hi ha en la carpeta de other_resources:
+![ImportarBBDD](https://github.com/lace8guti/ParaulogicMB/blob/main/Captura%20de%20pantalla%20de%202023-05-03%2021-34-42.png)
+
+És possible que la base de dades ja tingui entrades, si vols començar un joc propi, el meu suggeriment es que copiis la estructura de la base de dades en una nova base de dades buida (recorda desactivar l'AUTOINCREMENT a l'hora de fer la còpia).
+
+![CrearBBDD1](https://github.com/lace8guti/ParaulogicMB/blob/main/Captura%20de%20pantalla%20de%202023-05-03%2021-32-46.png)
+![CrearBBDD2](https://github.com/lace8guti/ParaulogicMB/blob/main/Captura%20de%20pantalla%20de%202023-05-03%2021-33-49.png)
+![CrearBBDD3](https://github.com/lace8guti/ParaulogicMB/blob/main/Captura%20de%20pantalla%20de%202023-05-03%2021-47-05.png)
+
+Una vegada preparada la BBDD i les credencials, queda una cosa més a preparar.
+Donat que és dels primers codis d'aquesta complexitat que he creat, el codi és extremadament poc eficient, això fa que la preparació del joc pugui trigar massa per al servidor, concretament pel temps d'execució màxim que té per defecte, per això aconsello fer un petit canvi previ a la configuració del php.
+
+Ves al terminal i obre amb un editor de text, l'arxiu "php.ini", aquest sol estar ubicat a la configuració del php:
+Després hauràs de modificar el valor de max_input_time (300 és un bon valor), control+O i control+X per a guardar i sortir, finalment, reinicia el servidor:
+![Configurar_php1](https://github.com/lace8guti/ParaulogicMB/blob/main/Captura%20de%20pantalla%20de%202023-05-03%2021-52-53.png)
+![Configurar_php2](https://github.com/lace8guti/ParaulogicMB/blob/main/Captura%20de%20pantalla%20de%202023-05-03%2021-53-10.png)
+![Configurar_php3](https://github.com/lace8guti/ParaulogicMB/blob/main/Captura%20de%20pantalla%20de%202023-05-03%2021-53-42.png)
+![Configurar_php4](https://github.com/lace8guti/ParaulogicMB/blob/main/Captura%20de%20pantalla%20de%202023-05-03%2021-53-56.png)
+
+Llavors, si vols començar a jugar desde 0:
+ves a  http://localhost/ParaulogicMBFinalA/scripts/preparacionJuego.php.
+Si tot ha sortit bé, s'hauria de redirigir automàticament al login, t'hauràs de registrar abans de poder fer login.
