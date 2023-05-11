@@ -47,7 +47,7 @@ function getScoreRanking() {
     }
 
     // Preparar la consulta SQL
-    $sql = "SELECT users.username, users.total_score, COUNT(challenges.word_guessed) AS words_guessed
+    $sql = "SELECT users.username, users.total_score, COUNT(challenges.word_guessed) AS words_guessed , users.id
             FROM users
             LEFT JOIN challenges ON users.id = challenges.user_id
             GROUP BY users.id
@@ -64,7 +64,8 @@ function getScoreRanking() {
         $ranking[] = array(
             'username' => $row['username'],
             'score' => $row['total_score'],
-            'words_guessed' => $row['words_guessed']
+            'words_guessed' => $row['words_guessed'],
+            'id' => $row['id']
         );
     }
 
@@ -352,6 +353,11 @@ function cerrarVentana(id) {
     <th scope="col">Nom d'usuari</th>
     <th scope="col">Puntuació total</th>
     <th scope="col">Paraules encertades</th>
+    <?php
+    if($_SESSION['username']=='admin'){
+    echo "<th scope='col'>Eliminar usuari</th>";
+    }
+    ?>
   </tr>
   </thead>
   <tbody>
@@ -360,6 +366,13 @@ function cerrarVentana(id) {
     <td><?php echo $user['username']; ?></td>
     <td><?php echo $user['score']; ?></td>
     <td><?php echo $user['words_guessed']; ?></td>
+    <?php
+    if ($_SESSION['username'] == 'admin') {
+    if ($_SESSION['id'] != $user['id']) {
+        echo "<td><a href='../user_management/delete.php?id=" . $user['id'] . "'>Esborrar</a></td>";
+    }
+}
+    ?>
   </tr>
   <?php endforeach; ?>
   </tbody>
