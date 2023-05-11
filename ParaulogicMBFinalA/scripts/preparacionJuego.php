@@ -278,5 +278,28 @@ function insertarPatronesYPangramas($combinacionesAceptables,$palabras) {
 // Llamamos a la función insertarPatronesYPangramas
 insertarPatronesYPangramas($combinacionesAceptables, $palabras);
 
+//////////////////////
+
+function insertAdminUser() {
+    // Mete un include conn.php
+    require_once "../user_management/conn.php";
+
+    $username = "admin";
+    $password = "comida";
+    $hash_password = password_hash($password, PASSWORD_DEFAULT);
+
+    $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
+    if ($stmt = mysqli_prepare($link, $sql)) {
+        mysqli_stmt_bind_param($stmt, "ss", $username, $hash_password);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+    }
+
+    mysqli_close($link);
+}
+
+// Llama a la función dde crear al usuario admin
+insertAdminUser();
+
 header("location: ../user_management/login.php");
 ?>
