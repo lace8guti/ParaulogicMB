@@ -847,6 +847,15 @@ function cerrarVentana(id) {
         <a class="navbar-brand">
         <img src="../images/signeInt.png" width="30" height="40" alt="Funcionament del joc" class="imatgeParaulogic" onclick="mostrarVentana('funcionament')">
         </a>
+        <?php
+        if ($_SESSION['username'] == 'admin'){
+        ?>
+        <li class="nav-item">
+            <button onclick="mostrarVentana('solucionsAdmin')">Solucions d'avui</button>
+       </li>
+        <?php
+        }
+        ?>
         <li class="nav-item2">
             <button onclick="mostrarVentana('miDiv1')" class="infoParaules">Mostra informació sobre les paraules</button>
        </li>
@@ -866,7 +875,7 @@ function cerrarVentana(id) {
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   
-  <div class="super-container">
+    <div class="super-container">
       
 	<div class="container">
 		<button class="letter-button" style="transform: rotate(0deg) translate(120px) rotate(0deg);" onclick="updateInput(this)"><?php echo $var1; ?></button>
@@ -931,9 +940,9 @@ function cerrarVentana(id) {
                         ?>
                     </p>
                     <button onclick="cerrarVentana('miDiv2')">Tanca</button>
-	</div>
+                </div>
       
-                        </div>
+    </div>
       <form action="paraulogicJoc.php" method="post">
           <input type="text" placeholder="|" id="word-input" name="word-input" class="resposta">
           <div class="button-container">
@@ -1038,5 +1047,21 @@ function cerrarVentana(id) {
           <a href="https://spellbee.org/">Spelling Bee de The New York Times</a><br>
          <button onclick="cerrarVentana('funcionament')">Tanca</button>
       </div>
+      <?php 
+      if ($_SESSION['username'] == 'admin'){?>
+         <div id='solucionsAdmin' style='display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; max-width: 600px; height: 80%; max-height: 600px; padding: 20px; background-color: #fff; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); z-index: 999;'> 
+         <?php
+                    echo "Solucions del repte d'avui";
+                    echo '<br>';
+                    
+                    echo implode(", ",$arrayPalabrasCorrectasDiarias);
+         ?>
+                    <button onclick="cerrarVentana('solucionsAdmin')">Tanca</button>
+         </div>
+      <?php
+      }
+      ?>
+      
 </body>
 </html>
+
